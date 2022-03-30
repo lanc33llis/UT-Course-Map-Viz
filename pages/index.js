@@ -44,7 +44,7 @@ majors.forEach((major, i) => {
                   if (typeof c == "string") {
                     data.links.push({source: `${src} ${c}`, target: noTitle, value: 6})
                     dByMajors[major].links.push({source: `${src} ${c}`, target: noTitle, value: 6})
-                    dByMajors[major].nodes.push({id: `${src} ${c}`, group: majors.indexOf(codeToMajorName[src]), actual: `${src} ${c}`})
+                    dByMajors[major].nodes.push({id: `${src} ${c}`, group: majors.indexOf(`${src} - ${codeToMajorName[src]}`), actual: `${src} ${c}`})
                   } else {
                     helper(c)
                   }
@@ -68,7 +68,6 @@ data.links = data.links.filter(l => {
   return false
 })
 
-console.log(dByMajors)
 const getColor = id => `#${((id * 34563453) % Math.pow(2, 24)).toString(16).padStart(6, '0')}`
 
 export default function Index() {
