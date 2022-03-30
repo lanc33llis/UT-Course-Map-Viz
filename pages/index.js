@@ -3,6 +3,7 @@ import * as j from './common/test.json'
 import * as majorNameToCode from './common/majorNameToCode.json'
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
+import { Scrollbar } from 'smooth-scrollbar-react'
 
 const ForceGraph2D = dynamic(() => import('react-force-graph').then(mod => mod.ForceGraph2D), { ssr: false })
 
@@ -79,7 +80,7 @@ export default function Index() {
         <button onClick={e => {
           setFilterOpen(!filterOpen)
         }}>Filter</button>
-        <div className={styles["filter-drop"]} style={{ display: filterOpen ? "flex" : "none" }}>
+        <Scrollbar className={styles["filter-drop"]} style={{ display: filterOpen ? "flex" : "none", right: "35px", top: "50px" }}>
           <button onClick={e => {
             setUData(data)
           }}>
@@ -88,7 +89,7 @@ export default function Index() {
           { majors.map(m => <button key={m} onClick={e => {
             setUData({nodes: dByMajors[m]?.nodes ? dByMajors[m].nodes : [], links: dByMajors[m]?.links ? dByMajors[m].links : []})
           }}>{m}</button>) }
-        </div>
+        </Scrollbar>
       </div> 
       <ForceGraph2D
         graphData={uData}
