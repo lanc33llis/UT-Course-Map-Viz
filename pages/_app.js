@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
     <Layout>
       <Head>
         <title>UT Course Map Viz</title>
-        <meta name="description" content="UT Course Map Viz" />
+        <meta name="description" content="Interactive network graph of the University of Texas at Austin's courses for the current semester. Work in progress."/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

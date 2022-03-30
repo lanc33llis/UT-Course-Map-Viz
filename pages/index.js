@@ -2,10 +2,12 @@ import styles from '../styles/Index.module.sass'
 import * as j from './common/test.json'
 import * as majorNameToCode from './common/majorNameToCode.json'
 import dynamic from 'next/dynamic'
-import { useState, useEffect } from 'react'
+import { useState, useRef, forwardRef } from 'react'
 import { Scrollbar } from 'smooth-scrollbar-react'
 
-const ForceGraph2D = dynamic(() => import('react-force-graph').then(mod => mod.ForceGraph2D), { ssr: false })
+const ForceGraph2D = dynamic(() => import('./components/ForceGraph'), { ssr: false })
+
+const ForwardRefForceGraph = forwardRef((props, ref) => <ForceGraph2D {...props} fgRef={ref} />)
 
 const codeToMajorName = (obj => Object.fromEntries(Object.entries(majorNameToCode).map(a => a.reverse())))(majorNameToCode)
 
@@ -74,6 +76,14 @@ const getColor = id => `#${((id * 34563453) % Math.pow(2, 24)).toString(16).padS
 export default function Index() {
   const [ uData, setUData ] = useState(data)
   const [ filterOpen, setFilterOpen ] = useState(false)
+  const forceGraph = useRef(null)
+
+  const handleFilter = () => {
+    let fg = forceGraph.current
+    fg.centerAt(0, 0, 100)
+    fg.zoom(.75)
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.toolbar}>
@@ -83,15 +93,18 @@ export default function Index() {
         <Scrollbar className={styles["filter-drop"]} style={{ display: filterOpen ? "flex" : "none", right: "35px", top: "50px" }}>
           <button onClick={e => {
             setUData(data)
+            handleFilter()
           }}>
             All
           </button>
           { majors.map(m => <button key={m} onClick={e => {
             setUData({nodes: dByMajors[m]?.nodes ? dByMajors[m].nodes : [], links: dByMajors[m]?.links ? dByMajors[m].links : []})
+            handleFilter()
           }}>{m}</button>) }
         </Scrollbar>
       </div> 
-      <ForceGraph2D
+      <ForwardRefForceGraph
+        ref={forceGraph}
         graphData={uData}
         backgroundColor={'#f0f0f0'}
         linkWidth={2}
