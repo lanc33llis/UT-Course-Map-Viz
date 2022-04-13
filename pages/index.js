@@ -8,7 +8,6 @@ import { Scrollbar } from 'smooth-scrollbar-react'
 const ForceGraph2D = dynamic(() => import('./components/ForceGraph'), { ssr: false })
 
 const ForwardRefForceGraph = forwardRef((props, ref) => <ForceGraph2D {...props} fgRef={ref} />)
-ForwardRefForceGraph.displayName = 'ForceGraph'
 
 const codeToMajorName = (obj => Object.fromEntries(Object.entries(majorNameToCode).map(a => a.reverse())))(majorNameToCode)
 
