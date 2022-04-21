@@ -15,8 +15,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Roadmap
 
 - [x] Force Graph with Data Scraped from Regristrar
-- [  ] Filters
-- [  ] Search
-- [  ] Detailed Tooltips
-- [  ] Course planner
-- [  ] Move from registrar to prereq https://utdirect.utexas.edu/registrar/preq/list.WBX. Doesn't give specifics like times and etc. but easier to scrape than the registrar 
+- [ ] Filters
+- [ ] Search
+- [ ] Detailed Tooltips
+- [ ] Course planner
+- [ ] Move from registrar to prereq https://utdirect.utexas.edu/registrar/preq/list.WBX. Doesn't give specifics like times and etc. but easier to scrape than the registrar 
